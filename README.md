@@ -8,3 +8,5 @@ df
 
 ### ec2 Out of memory 관련 해결 방법
 https://seungwoolog.tistory.com/m/68
+
+cf) ec2 가용 메모리 용량 1GB
