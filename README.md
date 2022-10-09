@@ -36,5 +36,5 @@ kill -9 7930
 nohup jupyter-notebook --ip=0.0.0.0 --no-browser --port=8928 &
 ```
 
-# class_indics
+### class_indics
 https://tykimos.github.io/2017/03/08/CNN_Getting_Started/
