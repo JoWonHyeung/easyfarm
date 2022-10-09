@@ -35,3 +35,6 @@ kill -9 7930
 #jupyter notebook 생성 명령어
 nohup jupyter-notebook --ip=0.0.0.0 --no-browser --port=8928 &
 ```
+
+# class_indics
+https://tykimos.github.io/2017/03/08/CNN_Getting_Started/
