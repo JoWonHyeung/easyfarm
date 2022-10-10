@@ -55,5 +55,5 @@ https://tykimos.github.io/2017/03/08/CNN_Getting_Started/
 ---
 ### Issue
 
-- DVC - gdrive OOB 관련 문제 -> deprecated 된 듯? -> AWS S3 사용해서 연결하고자함 
+- DVC - gdrive OOB 관련 문제해서 deprecated 된 듯. AWS S3 사용해서 연결하고자함 
 
