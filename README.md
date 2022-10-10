@@ -53,7 +53,3 @@ stateless : server side에 client와 server의 동작, 상태정보를 저장하
 https://tykimos.github.io/2017/03/08/CNN_Getting_Started/
 
 ---
-### Issue
-
-- DVC - gdrive OOB 관련 문제해서 deprecated 된 듯. AWS S3 사용해서 연결하고자함 
-
