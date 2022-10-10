@@ -1,7 +1,7 @@
 ## 프로젝트 방향성
 '장애인 주차구역 서비스' 프로젝트 당시에 Flask api 서버 구축을 시간 관계상 하지 못하여 이번 프로젝트에서 Flask Framework로 AI Serving Server를 구축하고자 한다.
 
----------------------------------------------------------
+---
 ### 서버 관련
 
 
@@ -46,11 +46,14 @@ stateful : server side에 client와 server의 동작, 상태정보를 저장하�
 stateless : server side에 client와 server의 동작, 상태정보를 저장하지 않는 형태, server의 응답이 client와의 세션 상태와 독립적이다. 예를 들어, UDP/HTTP가 있다.
 ![화면 캡처 2022-10-10 123959](https://user-images.githubusercontent.com/57468223/194796265-d2adb4ef-ef8c-4355-86a4-bf82457c1462.png)
 
--------------------------------------------------------------
+---
 ### AI 관련
 
 #### class_indics
 https://tykimos.github.io/2017/03/08/CNN_Getting_Started/
 
+---
+### Issue
 
+- DVC - gdrive OOB 관련 문제 -> deprecated 된 듯? -> AWS S3 사용해서 연결하고자함 
 
