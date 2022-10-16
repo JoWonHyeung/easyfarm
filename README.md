@@ -37,6 +37,10 @@ kill -9 7930
 
 #jupyter notebook 생성 명령어
 nohup jupyter-notebook --ip=0.0.0.0 --no-browser --port=8928 &
+
+#linux cpu 개수 확인
+grep -c processor /proc/cpuinfo
+
 ```
 
 #### Stateful vs Stateless
