@@ -35,22 +35,22 @@ def index():
     return "server test"
 
 # 데이터 예측 처리
-@app.route('/prediction')
-def local_predict_test():
-    model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_2.h5")
-
-    image = Image.open("test_image/test_imag.jpeg")
-    processed_image = preprocess_image(image, target_size=(224, 224))
-
-    prediction = model.predict(processed_image).tolist()
-
-    response = {
-            'result': {
-                'crop_name': label[np.argmax(prediction[0])],
-                'percentage' : max(prediction[0])
-            }
-        }
-    return flask.jsonify(response)
+# @app.route('/prediction')
+# def local_predict_test():
+#     model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_2.h5")
+#
+#     image = Image.open("test_image/test_imag.jpeg")
+#     processed_image = preprocess_image(image, target_size=(224, 224))
+#
+#     prediction = model.predict(processed_image).tolist()
+#
+#     response = {
+#             'result': {
+#                 'crop_name': label[np.argmax(prediction[0])],
+#                 'percentage' : max(prediction[0])
+#             }
+#         }
+#     return flask.jsonify(response)
 
 def preprocess_image(image, target_size):
     if image.mode != "RGB":
