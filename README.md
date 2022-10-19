@@ -4,6 +4,10 @@
 ![image](https://user-images.githubusercontent.com/57468223/196486402-fda1b143-4ed2-4b37-8b36-f07d47e769b1.png)
 
 
+
+oracle 서버 실행 순서 :  mkvirtualenv capstone(가상환경 실행) -> flask run -h 0.0.0.0
+
+
 ---
 ### 서버 관련
 
