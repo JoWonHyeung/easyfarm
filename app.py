@@ -8,9 +8,11 @@ from keras.applications import imagenet_utils
 from PIL import Image
 import numpy as np
 import flask
+import os
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False #response시, 한글 깨짐 이슈 해결
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 label = {0:'고추탄저병',
          1:'고추흰가루병',
@@ -35,22 +37,22 @@ def index():
     return "server test"
 
 # 데이터 예측 처리
-# @app.route('/prediction')
-# def local_predict_test():
-#     model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_2.h5")
-#
-#     image = Image.open("test_image/test_imag.jpeg")
-#     processed_image = preprocess_image(image, target_size=(224, 224))
-#
-#     prediction = model.predict(processed_image).tolist()
-#
-#     response = {
-#             'result': {
-#                 'crop_name': label[np.argmax(prediction[0])],
-#                 'percentage' : max(prediction[0])
-#             }
-#         }
-#     return flask.jsonify(response)
+@app.route('/prediction')
+def local_predict_test():
+     model = load_model("/home/ubuntu/Al_Flask_API_Server/model/xception_epoch10_pretrained.h5")
+
+     image = Image.open("/home/ubuntu/Al_Flask_API_Server/test_image/img.jpg")
+     processed_image = preprocess_image(image, target_size=(224, 224))
+
+     prediction = model.predict(processed_image).tolist()
+
+     response = {
+             'result': {
+                 'crop_name': label[np.argmax(prediction[0])],                                  
+                 'percentage' : max(prediction[0])
+             }
+         }
+     return flask.jsonify(response)
 
 def preprocess_image(image, target_size):
     if image.mode != "RGB":
@@ -82,4 +84,4 @@ def preprocess_image(image, target_size):
 if __name__ == '__main__':
 
     # Flask 서비스 스타트
-    app.run(host='0.0.0.0',port=8000)
+    app.run(host='0.0.0.0',port=5000)
