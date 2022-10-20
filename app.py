@@ -41,7 +41,7 @@ def index():
 def local_predict_test():
      model = load_model("/home/ubuntu/Al_Flask_API_Server/model/xception_epoch10_pretrained.h5")
 
-     image = Image.open("/home/ubuntu/Al_Flask_API_Server/test_image/img.jpg")
+     image = Image.open("/home/ubuntu/Al_Flask_API_Server/image/test_img.jpg")
      processed_image = preprocess_image(image, target_size=(224, 224))
 
      prediction = model.predict(processed_image).tolist()
