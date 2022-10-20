@@ -7,7 +7,7 @@
 
 oracle 서버 실행 순서 
 ```linux
-sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 5000 -j ACCEPT
+sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 5000 -j ACCEPT #서버 재부팅시, reset된다.
 
 sudo netfilter-persistent save
 
