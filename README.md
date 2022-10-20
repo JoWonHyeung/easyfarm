@@ -1,7 +1,8 @@
 ## 프로젝트 방향성
 '장애인 주차구역 서비스' 프로젝트 당시에 Flask api 서버 구축을 시간 관계상 하지 못하여 이번 프로젝트에서 Flask Framework로 Flask API Server를 구축하고자 한다. 또한, 실제 실무에서 ML Service 제공을 위한 워크플로우를 직접 적용해보고자 한다.
 
-![image](https://user-images.githubusercontent.com/57468223/196486402-fda1b143-4ed2-4b37-8b36-f07d47e769b1.png)
+![화면 캡처 2022-10-20 212355](https://user-images.githubusercontent.com/57468223/196947675-610eff71-a59e-4ede-95de-d0dbfc20ebb7.png)
+
 
 
 
