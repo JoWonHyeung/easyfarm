@@ -11,7 +11,9 @@ sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 5000 -j ACCEPT
 
 sudo netfilter-persistent save
 
-mkvirtualenv capstone(가상환경 실행) flask run -h 0.0.0.0
+mkvirtualenv capstone(가상환경 실행) 
+
+flask run -h 0.0.0.0
 ```
 
 ---
