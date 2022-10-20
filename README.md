@@ -5,8 +5,14 @@
 
 
 
-oracle 서버 실행 순서 :  mkvirtualenv capstone(가상환경 실행) -> flask run -h 0.0.0.0
+oracle 서버 실행 순서 
+```linux
+sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 5000 -j ACCEPT
 
+sudo netfilter-persistent save
+
+mkvirtualenv capstone(가상환경 실행) flask run -h 0.0.0.0
+```
 
 ---
 ### 서버 관련
