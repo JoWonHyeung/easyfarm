@@ -2,7 +2,8 @@
 '장애인 주차구역 서비스' 프로젝트 당시에 Flask api 서버 구축을 시간 관계상 하지 못하여 이번 프로젝트에서 Flask Framework로 Flask API Server를 구축하고자 한다. 또한, 실제 실무에서 ML Service 제공을 위한 워크플로우를 직접 적용해보고자 한다. 단, 클라우드 서버 성능 제한 문제로 많은 것을 적용하지 못 할듯 싶다.
 
 ### 아키텍처
-![화면 캡처 2022-10-20 212355](https://user-images.githubusercontent.com/57468223/196947675-610eff71-a59e-4ede-95de-d0dbfc20ebb7.png)
+![화면 캡처 2022-10-22 024632](https://user-images.githubusercontent.com/57468223/197257652-05861382-e6d8-4bbc-b45e-f1af1d52299b.png)
+
 
 ### 클라우드 비교
 
