@@ -24,6 +24,18 @@ mkvirtualenv capstone(가상환경 실행)
 flask run -h 0.0.0.0
 ```
 
+### docker container 실행 순서
+
+```linux
+docker-compose build web
+
+docker ps # 없으면 -a 붙여서 status확인
+
+docker-compose up -d
+```
+
+
+
 ---
 ### 서버 관련
 
