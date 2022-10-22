@@ -36,10 +36,10 @@ label = {0:'고추탄저병',
 def index():
     return "server test"
 
-# 데이터 예측 처리리
+# 데이터 예측 처리
 @app.route('/prediction')
 def local_predict_test():
-     model = load_model("/Al_Flask_API_Server/model/xception_epoch10_pretrained.h5") #fine-tuning model will change
+    model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5") #fine-tuning model will change
 
      image = Image.open("/Al_Flask_API_Server/image/test_img.jpg")
      processed_image = preprocess_image(image, target_size=(224, 224))
