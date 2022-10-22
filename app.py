@@ -41,18 +41,18 @@ def index():
 def local_predict_test():
     model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5") #fine-tuning model will change
 
-     image = Image.open("/Al_Flask_API_Server/image/test_img.jpg")
-     processed_image = preprocess_image(image, target_size=(224, 224))
+    image = Image.open("/Al_Flask_API_Server/image/test_img.jpg")
+    processed_image = preprocess_image(image, target_size=(224, 224))
 
-     prediction = model.predict(processed_image).tolist()
+    prediction = model.predict(processed_image).tolist()
 
-     response = {
+    response = {
              'result': {
                  'crop_name': label[np.argmax(prediction[0])],                                  
                  'percentage' : max(prediction[0])
              }
          }
-     return flask.jsonify(response)
+    return flask.jsonify(response)
 
 def preprocess_image(image, target_size):
     if image.mode != "RGB":
