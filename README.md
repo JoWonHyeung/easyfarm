@@ -12,6 +12,9 @@
 ![Untitled](https://user-images.githubusercontent.com/57468223/196968817-2ae6e683-8a5f-4c5d-a9e9-cb6b7d1eaf23.png)
 
 
+### 모델 성능 지표
+
+To be continue...
 
 ### oracle 서버 실행 순서 
 
