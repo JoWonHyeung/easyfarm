@@ -72,7 +72,7 @@ def preprocess_image(image, target_size):
 
 @app.route("/prediction",methods=['POST'])
 def predict():
-    model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
+    model = load_model("Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
 
     plantType = request.form['plantType']
 
