@@ -5,14 +5,14 @@
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Remote Python 3.7.0 (sftp://ec2-user@52.5.196.8:22/home/ec2-user/anaconda3/bin/python3.7)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Remote Python 3.10.6 (sftp://ubuntu@140.238.6.247:22/bin/python3)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Jinja2" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../Al_Server\templates" />
+        <option value="$USER_HOME$/Al_Server\templates" />
       </list>
     </option>
   </component>

@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    container_name: ai-server
+    volumes:
+      - .:/code
+    ports:
+      - "5000:5000"
