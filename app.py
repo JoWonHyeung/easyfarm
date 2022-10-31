@@ -74,7 +74,7 @@ def preprocess_image(image, target_size):
 def predict():
     model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
 
-    plantType = request.form['plantType']
+    #plantType = request.form['plantType']
 
     image = request.files['image'].read()
 
