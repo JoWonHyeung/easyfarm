@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM ubuntu:20.04
 
 WORKDIR /Al_Flask_API_Server
 
