@@ -36,6 +36,14 @@ docker ps # 없으면 -a 붙여서 status확인
 
 docker-compose up -d
 ```
+### Dockerfile build 명령어
+
+```linux
+docker build -f ./Dockerfile .
+```
+
+
+
 
 ---
 ### 서버 관련
