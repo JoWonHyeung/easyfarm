@@ -1,7 +1,6 @@
 FROM ubuntu:latest
 
-RUN apt-get update -y
-RUN apt-get install -y python-pip python-dev build-essential
+RUN apt update && apt-get install python3 python3-pip -y
 
 WORKDIR /Al_Flask_API_Server
 
