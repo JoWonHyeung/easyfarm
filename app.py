@@ -34,13 +34,9 @@ label = {0:'고추탄저병',
 @app.route('/')
 @app.route("/test")
 def index():
-
-
-
-
     return "server test"
 
-# 데이터 예측 처리
+# Local Test
 # @app.route('/prediction')
 # def local_predict_test():
 #     model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
@@ -89,7 +85,6 @@ def predict():
                     'pestPercentage' : max(prediction[0])
                 }
             }
-
     return jsonify(response)
 
 
