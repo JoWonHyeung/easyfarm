@@ -1,14 +1,10 @@
-import base64
 from typing import io
-
-from flask import Flask, request, render_template
+from flask import Flask, request
 from keras.models import load_model
 from keras_preprocessing.image import img_to_array
-from keras.applications import imagenet_utils
 from PIL import Image
 import numpy as np
 from flask import jsonify
-from io import BytesIO
 import io
 
 app = Flask(__name__)
@@ -64,8 +60,6 @@ def preprocess_image(image, target_size):
     image = np.expand_dims(image, axis=0)
     return image
 
-
-
 @app.route("/prediction",methods=['POST'])
 def predict():
     model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
@@ -87,7 +81,6 @@ def predict():
             }
     return jsonify(response)
 
-
+#Server start
 if __name__ == '__main__':
-    # Flask 서비스 스타트
     app.run(host='0.0.0.0',port=5000,debug=True)
