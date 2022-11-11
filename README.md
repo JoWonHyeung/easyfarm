@@ -3,6 +3,10 @@
 
 ### 아키텍처(Version 5)
 ![image](https://user-images.githubusercontent.com/57468223/200800757-cca5cbf6-38bb-4bc9-80f7-e342a7e525d9.png)
+![image](https://user-images.githubusercontent.com/57468223/201261498-62b4adf4-2265-4a25-811c-33670de8b6a0.png)
+![image](https://user-images.githubusercontent.com/57468223/201261511-19086be6-6a87-4692-ac46-fdbb0e01c358.png)
+![image](https://user-images.githubusercontent.com/57468223/201261516-779b92c0-3c11-41c1-b419-2373f5eaa0d1.png)
+![image](https://user-images.githubusercontent.com/57468223/201261534-2fe51629-bba1-427a-b8b2-2a813bacc4e5.png)
 
 ### 클라우드 비교
 
