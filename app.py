@@ -32,25 +32,6 @@ label = {0:'고추탄저병',
 def index():
     return "server test"
 
-# Local Test
-# @app.route('/prediction')
-# def local_predict_test():
-#     model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
-#
-#     image = Image.open("test_image/img.jpg")
-#     processed_image = preprocess_image(image, target_size=(224, 224))
-#
-#     prediction = model.predict(processed_image).tolist()
-#
-#     response = {
-#             'result': {
-#                 'crop_name': label[np.argmax(prediction[0])],
-#                 'percentage' : max(prediction[0])
-#             }
-#         }
-#
-#     return flask.jsonify(response)
-
 def preprocess_image(image, target_size):
     if image.mode != "RGB":
         image = image.convert("RGB")
@@ -62,7 +43,10 @@ def preprocess_image(image, target_size):
 
 @app.route("/prediction",methods=['POST'])
 def predict():
+    #server model load
     model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
+    #local model load
+    #model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
 
     #plantType = request.form['plantType']
 
@@ -72,13 +56,13 @@ def predict():
     processed_image = preprocess_image(image, target_size=(224, 224))
     prediction = model.predict(processed_image).tolist()
 
-    # 바뀐 부분
     response = {
                 'result': {
                     'pestName': label[np.argmax(prediction[0])],
                     'pestPercentage' : max(prediction[0])
                 }
             }
+
     return jsonify(response)
 
 #Server start
