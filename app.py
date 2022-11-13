@@ -28,7 +28,6 @@ label = {0:'고추탄저병',
          15:'파녹병'}
 
 @app.route('/')
-@app.route("/test")
 def index():
     return "server test"
 
