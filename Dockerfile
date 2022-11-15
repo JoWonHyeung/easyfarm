@@ -29,6 +29,7 @@ COPY / /Al_Flask_API_Server
 
 #CNN model download from s3
 RUN aws s3 cp s3://capstonedataimage/xception_epoch10_fine_tuning.h5 /Al_Flask_API_Server/model
+RUN aws s3 cp s3://capstonedataimage/gochu_xception_unfreeze.h5 /Al_Flask_API_Server/model
 
 #Server execute
 CMD ["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
