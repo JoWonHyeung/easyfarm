@@ -1,10 +1,5 @@
 FROM ubuntu:latest
 
-#Labeling
-LABEL maintainer = "JWH <mesh153@naver.com>"
-LABEL title = "S3 connect"
-LABEL description = "S3 file download test"
-
 #python,pip install
 RUN apt update -y
 RUN apt install -y python3
