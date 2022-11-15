@@ -93,7 +93,7 @@ def predictLayer2():
             gochu_model = load_model("/Al_Flask_API_Server/model/gochu_xception_unfreeze.h5")
             prediction = gochu_model.predict(processed_image).tolist()
             response = {
-                'resultLayer2': {
+                'result2': {
                     'pestName': label[np.argmax(prediction[0])],
                     'pestPercentage': max(prediction[0])
                 }
