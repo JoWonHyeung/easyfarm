@@ -29,7 +29,7 @@ label = {0:'고추탄저병',
 
 @app.route('/')
 def index():
-    return "capstone server 2"
+    return "capstone server"
 
 def preprocess_image(image, target_size):
     if image.mode != "RGB":
@@ -43,9 +43,9 @@ def preprocess_image(image, target_size):
 @app.route("/prediction",methods=['POST'])
 def predict():
     #server model load
-    model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
+    #model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
     #local model load
-    #model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
+    model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
 
     #plantType = request.form['plantType']
 
@@ -67,9 +67,9 @@ def predict():
 @app.route("/prediction/test")
 def predictLayer2():
     #server model load
-    #model = load_model("/Al_Flask_API_Server/model/gochu_xception_unfreeze.h5")
+    model = load_model("/Al_Flask_API_Server/model/gochu_xception_unfreeze.h5")
     #local model load
-    model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
+    #model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
 
     #사용자 입력 작물
     plantType = request.form['plantType']
