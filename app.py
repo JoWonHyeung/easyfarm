@@ -29,7 +29,7 @@ label = {0:'고추탄저병',
 
 @app.route('/')
 def index():
-    return "capstone server2"
+    return "capstone server"
 
 def preprocess_image(image, target_size):
     if image.mode != "RGB":
