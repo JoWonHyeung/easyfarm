@@ -108,7 +108,7 @@ def predictLayer2():
         elif plantType == "무":
             pass
         else:
-            print("PlantType Error.")
+            print("PlantType Error")
 
     response = {
                 'result': {
