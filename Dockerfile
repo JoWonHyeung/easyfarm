@@ -12,6 +12,8 @@ COPY requirements.txt /Al_Flask_API_Server/requirements.txt
 #Library install
 RUN pip3 install --user --upgrade tensorflow
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN pip install --upgrade keras
+RUN pip install --upgrade tensorflow
 
 #AWS CLI install
 RUN pip install awscli
