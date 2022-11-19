@@ -1,10 +1,9 @@
 from typing import io
-from flask import Flask, request
+from flask import Flask, request,jsonify
 from keras.models import load_model
 from keras_preprocessing.image import img_to_array
 from PIL import Image
 import numpy as np
-from flask import jsonify
 import io
 
 app = Flask(__name__)
@@ -27,6 +26,11 @@ label = {0:'고추탄저병',
          14:'파노균병',
          15:'파녹병'}
 
+#server model load
+model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
+#local model load
+#model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
+
 @app.route('/')
 def index():
     return "capstone server"
@@ -42,10 +46,6 @@ def preprocess_image(image, target_size):
 
 @app.route("/prediction",methods=['POST'])
 def predict():
-    #server model load
-    model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
-    #local model load
-    #model = load_model("C:/Users/Jo/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
 
     #plantType = request.form['plantType']
 
