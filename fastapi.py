@@ -4,6 +4,7 @@ from PIL import Image
 from keras.models import load_model
 from keras_preprocessing.image import img_to_array
 from PIL import Image
+from .monitoring import instrumentator
 import numpy as np
 
 label = {0:'고추탄저병',
@@ -24,12 +25,12 @@ label = {0:'고추탄저병',
          15:'파녹병'}
 
 #server model path
-
 model_path = "/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5"
-
 model = load_model(model_path)
 
 app = FastAPI()
+
+instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)
 
 @app.get('/')
 def root_route():
