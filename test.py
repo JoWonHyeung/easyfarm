@@ -24,6 +24,7 @@ label = {0:'고추탄저병',
          15:'파녹병'}
 
 #server model path
+
 model_path = "/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5"
 
 model = load_model(model_path)
