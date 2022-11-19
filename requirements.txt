@@ -2,3 +2,4 @@ Flask
 keras
 Pillow
 uvicorn
+fastapi
