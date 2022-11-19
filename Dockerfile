@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN pip install --upgrade keras
 RUN pip install --upgrade tensorflow
 
-pip install Keras-Preprocessing
+RUN pip install Keras-Preprocessing
 #AWS CLI install
 RUN pip install awscli
 
