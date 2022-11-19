@@ -16,9 +16,6 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 RUN pip install --upgrade keras
 RUN pip install --upgrade tensorflow
 
-RUN pip install Keras-Preprocessing
-RUN pip install python-multipart
-
 #AWS CLI install
 RUN pip install awscli
 
@@ -34,4 +31,5 @@ RUN aws s3 cp s3://capstonedataimage/gochu_xception_unfreeze.h5 /Al_Flask_API_Se
 
 #Server execute
 #CMD ["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
-CMD ["uvicorn", "test:app", "--reload", "--host","0.0.0.0","--port","5000"]
+CMD ["uvicorn", "fastapi:app", "--reload", "--host","0.0.0.0","--port","5000"]
+
