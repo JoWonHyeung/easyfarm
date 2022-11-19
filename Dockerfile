@@ -17,6 +17,8 @@ RUN pip install --upgrade keras
 RUN pip install --upgrade tensorflow
 
 RUN pip install Keras-Preprocessing
+RUN pip install python-multipart
+
 #AWS CLI install
 RUN pip install awscli
 
