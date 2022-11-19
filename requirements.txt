@@ -7,6 +7,6 @@ fastapi
 Keras-Preprocessing
 python-multipart
 prometheus-fastapi-instrumentator==5.7.0
-pydantic==1.6.2
+pydantic
 uvicorn==0.13.2
 joblib
