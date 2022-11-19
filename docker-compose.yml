@@ -9,5 +9,5 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - ENABLE_METRICS = true
+      - ENABLE_METRICS=true
   
