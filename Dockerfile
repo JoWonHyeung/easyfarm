@@ -30,4 +30,5 @@ RUN aws s3 cp s3://capstonedataimage/xception_epoch10_fine_tuning.h5 /Al_Flask_A
 RUN aws s3 cp s3://capstonedataimage/gochu_xception_unfreeze.h5 /Al_Flask_API_Server/model
 
 #Server execute
-CMD ["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
+#CMD ["flask", "run", "-h", "0.0.0.0", "-p", "5000"]
+CMD ["uvicorn", "test:app", "--reload", "--host=0.0.0.0", "--port=8099"]
