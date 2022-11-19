@@ -33,7 +33,7 @@ model = load_model("/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5")
 
 @app.route('/')
 def index():
-    return "capstone server test"
+    return "capstone server"
 
 def preprocess_image(image, target_size):
     if image.mode != "RGB":
@@ -46,7 +46,6 @@ def preprocess_image(image, target_size):
 
 @app.route("/prediction",methods=['POST'])
 def predict():
-
     #plantType = request.form['plantType']
 
     image = request.files['image'].read()
