@@ -4,6 +4,7 @@ from keras.models import load_model
 from keras_preprocessing.image import img_to_array
 from PIL import Image
 from monitoring import instrumentator
+import numpy as np
 
 label = {0:'고추탄저병',
          1:'고추흰가루병',
