@@ -32,15 +32,17 @@ app = FastAPI()
 
 instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)
 
+
 @app.get('/')
 def root_route():
     return {"error": "capstone server"}
 
 # 데이터 준비
 @app.post('/prediction')
-async def prediction_route(file: UploadFile = File(...)):
-    contents = await file.read()
+async def prediction_route(image: UploadFile = File(...),plantType: Union[str,None] = Header(default=None)):
+    contents = await image.read()
     img = Image.open(BytesIO(contents))
+    print(plantType)
 
     processed_image = preprocess_image(img, target_size=(224, 224))
     prediction = model.predict(processed_image).tolist()
