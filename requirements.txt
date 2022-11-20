@@ -1,7 +1,5 @@
-Flask
 keras
 Pillow
-
 uvicorn
 fastapi
 Keras-Preprocessing
