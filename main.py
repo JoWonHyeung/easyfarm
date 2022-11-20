@@ -34,7 +34,7 @@ instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=
 
 @app.get('/')
 def root_route():
-    return {"error": "you must 'prediction'"}
+    return {"error": "you must add url /prediction"}
 
 # 데이터 준비
 @app.post('/prediction')
