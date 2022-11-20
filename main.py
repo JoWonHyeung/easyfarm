@@ -40,8 +40,8 @@ def root_route():
 
 # 데이터 준비
 @app.post('/prediction')
-async def prediction_route(image: UploadFile = File(...)):
-    contents = await image.read()
+async def prediction_route(file: UploadFile = File(...)):
+    contents = await file.read()
     img = Image.open(BytesIO(contents))
 
 
