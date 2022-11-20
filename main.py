@@ -32,7 +32,6 @@ app = FastAPI()
 
 instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)
 
-
 @app.get('/')
 def root_route():
     return {"error": "you must 'prediction'"}
