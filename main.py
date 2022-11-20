@@ -42,7 +42,6 @@ def root_route():
 async def prediction_route(image: UploadFile = File(...),plantType: Union[str,None] = Header(default=None)):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
-    print(plantType)
 
     processed_image = preprocess_image(img, target_size=(224, 224))
     prediction = model.predict(processed_image).tolist()
