@@ -17,5 +17,5 @@ scrape_configs:
     scrape_timeout: 200s
     metrics_path: /prometheus/
     static_configs:
-      - targets:
-          - 34.64.84.255:8080
+    - targets:
+      - 34.64.84.255:8080
