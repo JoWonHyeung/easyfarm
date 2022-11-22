@@ -13,8 +13,8 @@ scrape_configs:
       - 34.64.86.255:5000  # metrics from model
 
   - job_name: 'jenkins'
-    scrape_interval: 2000s
-    scrape_timeout: 1000s
+    scrape_interval: 200s
+    scrape_timeout: 100s
     metrics_path: /prometheus/
     static_configs:
     - targets:
