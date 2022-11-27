@@ -108,7 +108,7 @@ async def prediction_route(image: UploadFile = File(...)):
     return response
 
 
-@app.post('/prediction_test')
+@app.post('/prediction/test')
 async def prediction_test(image: UploadFile = File(...), plantType: str = Form(...)):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
@@ -119,7 +119,6 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
     response = ""
     if plantType != label_to_crop(label[np.argmax(prediction[0])]):
         if plantType == "고추":
-            print("gochu")
             gochu_pred = gochu_model.predict(processed_image).tolist()
             response = {
                 'result': {
@@ -128,7 +127,6 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
                 }
             }
         elif plantType == "배추":
-            print("bachu")
             bachu_pred = bachu_model.predict(processed_image).tolist()
             response = {
                 'result': {
@@ -137,7 +135,6 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
                 }
             }
         elif plantType == "파":
-            print("fa")
             fa_pred = fa_model.predict(processed_image).tolist()
             response = {
                 'result': {
@@ -146,7 +143,6 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
                 }
             }
         elif plantType == "콩":
-            print("kong")
             kong_pred = kong_model.predict(processed_image).tolist()
             response = {
                 'result': {
@@ -155,7 +151,6 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
                 }
             }
         elif plantType == "무":
-            print("mu")
             mu_pred = mu_model.predict(processed_image).tolist()
             response = {
                 'result': {
@@ -164,7 +159,11 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
                 }
             }
         else:
-            print("plantType Error")
+            response = {
+                'result' : {
+                    'status': 'plantType error'
+                }
+            }
     else:
         response = {
             'result': {
