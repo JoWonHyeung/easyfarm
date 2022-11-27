@@ -108,7 +108,7 @@ async def prediction_route(image: UploadFile = File(...)):
     return response
 
 
-@app.post('/prediction/test')
+@app.post('/prediction_test')
 async def prediction_test(image: UploadFile = File(...), plantType: str = Form(...)):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
