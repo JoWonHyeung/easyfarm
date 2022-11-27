@@ -2,9 +2,11 @@ keras
 Pillow
 uvicorn
 fastapi
+pydantic
 Keras-Preprocessing
 python-multipart
 prometheus-fastapi-instrumentator
 uvicorn
 joblib
 numpy
+
