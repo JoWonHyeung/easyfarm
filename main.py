@@ -92,7 +92,7 @@ def root_route():
 
 
 @app.post('/prediction')
-async def prediction_route(image: UploadFile = File(...), plantType: str = Form(...)):
+async def prediction_route(image: UploadFile = File(...)):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
 
