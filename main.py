@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, Form
+from fastapi import FastAPI, UploadFile, File, Form, Response
 from io import BytesIO
 from keras.models import load_model
 from keras_preprocessing.image import img_to_array
@@ -94,20 +94,21 @@ def root_route():
 
 
 @app.post('/prediction')
-async def prediction_route(image: UploadFile = File(...)):
+async def prediction_route(image: UploadFile = File(...), response: Response = None):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
 
     processed_image = preprocess_image(img, target_size=(224, 224))
     prediction = model.predict(processed_image).tolist()
 
-    response = {
+    result = {
         'result': {
             'pestName': label[np.argmax(prediction[0])],
             'pestPercentage': max(prediction[0])
         }
     }
-    return response
+    response.headers['pestName'] = label[np.argmax(prediction[0])]
+    return result
 
 
 @app.post('/prediction/test')
