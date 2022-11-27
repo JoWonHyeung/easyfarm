@@ -3,6 +3,7 @@ from io import BytesIO
 from keras.models import load_model
 from keras_preprocessing.image import img_to_array
 from PIL import Image
+from monitoring import instrumentator
 import numpy as np
 
 
@@ -85,6 +86,7 @@ model, fa_model, gochu_model, kong_model, mu_model, bachu_model = model_load()
 
 app = FastAPI()
 
+instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)
 
 @app.get('/')
 def root_route():
