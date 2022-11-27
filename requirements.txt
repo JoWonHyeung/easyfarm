@@ -1,10 +1,12 @@
-keras
-Pillow
+keras~=2.10.0
+Pillow~=9.2.0
 uvicorn
-fastapi
+fastapi~=0.87.0
 Keras-Preprocessing
 python-multipart
 prometheus-fastapi-instrumentator==5.7.0
-pydantic
+pydantic~=1.10.2
 uvicorn==0.13.2
 joblib
+numpy~=1.23.4
+Flask~=2.2.2
