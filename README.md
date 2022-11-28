@@ -1,5 +1,7 @@
 ## 프로젝트 방향성
-'장애인 주차구역 서비스' 프로젝트 당시에 Flask api 서버 구축을 시간 관계상 하지 못하여 이번 프로젝트에서 Flask Framework로 Flask API Server를 구축하고자 한다. 또한, 실제 실무에서 ML Service 제공을 위한 워크플로우를 직접 적용해보고자 한다. 단, 클라우드 서버 리소스 제한으로 많은 것을 적용하지는 못 할 듯하다.
+'장애인 주차구역 서비스' 프로젝트 당시에 Flask api 서버 구축을 시간 관계상 하지 못하여 이번 프로젝트에서 Flask Framework로 Flask API Server를 구축하고자 한다. 또한, 실제 실무에서 ML Service 제공을 위한 워크플로우를 직접 적용해보고자 한다. 
+
+[수정] Flask -> FastAPI
 
 ### 아키텍처(Version 7)
 ![image](https://user-images.githubusercontent.com/57468223/204259888-e6db6a58-e876-4af1-aa9d-02dbc2d2d67c.png)
