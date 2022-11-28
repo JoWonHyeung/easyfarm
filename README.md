@@ -8,7 +8,7 @@
 
 ### 클라우드 비교
 
-- AWS를 사용하려고 하였으나, Oracle 프리티어가 성능이 더 우수하여 서버를 이전함
+- GCP 크레딧을 사용하여 서버 구축
 
 ![Untitled](https://user-images.githubusercontent.com/57468223/196968817-2ae6e683-8a5f-4c5d-a9e9-cb6b7d1eaf23.png)
 
