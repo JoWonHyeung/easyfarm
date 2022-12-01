@@ -3,7 +3,7 @@ from typing import Callable
 
 import numpy as np
 from prometheus_fastapi_instrumentator import Instrumentator, metrics
-from prometheus_fastapi_instrumentator.metrics import Info, Histogram
+from prometheus_fastapi_instrumentator.metrics import Info, Histogram, Counter
 
 NAMESPACE = os.environ.get("METRICS_NAMESPACE", "fastapi")
 SUBSYSTEM = os.environ.get("METRICS_SUBSYSTEM", "model")
@@ -63,15 +63,11 @@ def model_output(
         metric_doc: str = "Output value of cnn model",
         metric_namespace: str = "",
         metric_subsystem: str = "",
-        buckets=(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, float("inf")),
 ) -> Callable[[Info], None]:
-    METRIC = Histogram(
-        metric_name,
-        metric_doc,
-        buckets=buckets,
-        namespace=metric_namespace,
-        subsystem=metric_subsystem,
+    METRIC = Counter(
+        "result_pestName",
     )
+
     def instrumentation(info: Info) -> None:
         if info.modified_handler == "/prediction":
             predicted = info.response.headers.get("pestName")

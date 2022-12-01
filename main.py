@@ -116,6 +116,7 @@ async def prediction_route(image: UploadFile = File(...), response: Response = N
             'pestPercentage': max(prediction[0])
         }
     }
+
     response.headers['pestName'] = str(np.argmax(prediction[0]))
     response.headers['pestPercentage'] = str(max(prediction[0]))
 
