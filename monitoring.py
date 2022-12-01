@@ -67,14 +67,14 @@ def model_output(
 ) -> Callable[[Info], None]:
     METRIC = Counter(
         "result_pestName",
-        "cnn model output abount crop"
+        "cnn model output about crop"
     )
 
     def instrumentation(info: Info) -> None:
         if info.modified_handler == "/prediction":
             predicted = info.response.headers.get("pestName")
             if predicted:
-                METRIC.observe(predicted)
+                METRIC.labels(predicted).inc()
 
     return instrumentation
 
