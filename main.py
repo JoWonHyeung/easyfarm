@@ -10,20 +10,20 @@ from pydantic import BaseModel, Field
 
 def model_load():
     # server model path
-    model_path = "/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5"
-    fa_path = "/Al_Flask_API_Server/model/fa_xception_unfreeze.h5"
-    gochu_path = "/Al_Flask_API_Server/model/gochu_xception_unfreeze.h5"
-    kong_path = "/Al_Flask_API_Server/model/kong_xception_unfreeze.h5"
-    mu_path = "/Al_Flask_API_Server/model/mu_xception_fine_tuning.h5"
-    bachu_path = "/Al_Flask_API_Server/model/bachu_xception_fine_tuning.h5"
+    # model_path = "/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5"
+    # fa_path = "/Al_Flask_API_Server/model/fa_xception_unfreeze.h5"
+    # gochu_path = "/Al_Flask_API_Server/model/gochu_xception_unfreeze.h5"
+    # kong_path = "/Al_Flask_API_Server/model/kong_xception_unfreeze.h5"
+    # mu_path = "/Al_Flask_API_Server/model/mu_xception_fine_tuning.h5"
+    # bachu_path = "/Al_Flask_API_Server/model/bachu_xception_fine_tuning.h5"
 
     # local model path
-    # model_path = "C:/Users/Jo/capstone/model/xception_epoch10_fine_tuning.h5"
-    # fa_path = "C:/Users/Jo/capstone/model/fa_xception_unfreeze.h5"
-    # gochu_path = "C:/Users/Jo/capstone/model/gochu_xception_unfreeze.h5"
-    # kong_path = "C:/Users/Jo/capstone/model/kong_xception_unfreeze.h5"
-    # mu_path = "C:/Users/Jo/capstone/model/mu_xception_fine_tuning.h5"
-    # bachu_path = "C:/Users/Jo/capstone/model/bachu_xception_fine_tuning.h5"
+    model_path = "C:/Users/Jo/capstone/model/xception_epoch10_fine_tuning.h5"
+    fa_path = "C:/Users/Jo/capstone/model/fa_xception_unfreeze.h5"
+    gochu_path = "C:/Users/Jo/capstone/model/gochu_xception_unfreeze.h5"
+    kong_path = "C:/Users/Jo/capstone/model/kong_xception_unfreeze.h5"
+    mu_path = "C:/Users/Jo/capstone/model/mu_xception_fine_tuning.h5"
+    bachu_path = "C:/Users/Jo/capstone/model/bachu_xception_fine_tuning.h5"
 
     model = load_model(model_path)
     fa_model = load_model(fa_path)
@@ -123,9 +123,6 @@ async def prediction_route(image: UploadFile = File(...), response: Response = N
     response.headers['pestPercentage'] = str(max(prediction[0]))
     response.headers['inputPlant'] = crop_to_eng(plantType)
 
-    print(plantType)
-    print(crop_to_eng(plantType))
-
     return PredictionResult(
         pestName=str(np.argmax(prediction[0])),
         pestPercentage=max(prediction[0]),
@@ -223,15 +220,15 @@ def label_to_crop(crop):
         return "error"
 
 def crop_to_eng(crop):
-    if crop == "고추":
+    if crop in "고추":
         return "gochu"
-    elif crop == "무":
+    elif crop in "무":
         return "mu"
-    elif crop == "배추":
+    elif crop in "배추":
         return "bachu"
-    elif crop == "콩":
+    elif crop in "콩":
         return "kong"
-    elif crop == "파":
+    elif crop in "파":
         return "fa"
     else:
         return "error input plant"
