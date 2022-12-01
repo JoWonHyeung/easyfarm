@@ -66,8 +66,9 @@ def model_output(
         metric_subsystem: str = "",
 ) -> Callable[[Info], None]:
     METRIC = Counter(
-        "result_pestName",
-        "cnn model output about crop"
+        "http_user_result_pestName",
+        "cnn model output about crop",
+        labelnames = ("pestName",)
     )
 
     def instrumentation(info: Info) -> None:
