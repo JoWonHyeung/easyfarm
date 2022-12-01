@@ -72,7 +72,6 @@ def model_output(
         namespace=metric_namespace,
         subsystem=metric_subsystem,
     )
-
     def instrumentation(info: Info) -> None:
         if info.modified_handler == "/prediction":
             predicted = info.response.headers.get("pestName")
