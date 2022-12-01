@@ -5,6 +5,7 @@ from keras_preprocessing.image import img_to_array
 from PIL import Image
 from monitoring import instrumentator
 import numpy as np
+from pydantic import BaseModel, Field
 
 
 def model_load():
@@ -88,9 +89,14 @@ app = FastAPI()
 
 instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)
 
-class PredictionResult:
+class PredictionResult(BaseModel):
     pestName: str
-    pestPercentage: float
+    pestPercentage: float = Field(
+        ...,
+        ge=0,
+        le=100,
+        description="pest Percentage",
+    )
 
 
 @app.get('/')
