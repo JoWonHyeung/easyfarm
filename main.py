@@ -123,6 +123,9 @@ async def prediction_route(image: UploadFile = File(...), response: Response = N
     response.headers['pestPercentage'] = str(max(prediction[0]))
     response.headers['inputPlant'] = crop_to_eng(plantType)
 
+    print(plantType)
+    print(crop_to_eng(plantType))
+
     return PredictionResult(
         pestName=str(np.argmax(prediction[0])),
         pestPercentage=max(prediction[0]),
