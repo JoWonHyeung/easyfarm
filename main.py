@@ -91,12 +91,7 @@ instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=
 
 class PredictionResult(BaseModel):
     pestName: str
-    pestPercentage: float = Field(
-        ...,
-        ge=0,
-        le=100,
-        description="pest Percentage",
-    )
+    pestPercentage: float
 
 
 @app.get('/')
