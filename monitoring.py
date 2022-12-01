@@ -3,7 +3,8 @@ from typing import Callable
 
 import numpy as np
 from prometheus_fastapi_instrumentator import Instrumentator, metrics
-from prometheus_fastapi_instrumentator.metrics import Info, Histogram, Counter
+from prometheus_fastapi_instrumentator.metrics import Info, Histogram
+from prometheus_client import Counter
 
 NAMESPACE = os.environ.get("METRICS_NAMESPACE", "fastapi")
 SUBSYSTEM = os.environ.get("METRICS_SUBSYSTEM", "model")
@@ -66,6 +67,7 @@ def model_output(
 ) -> Callable[[Info], None]:
     METRIC = Counter(
         "result_pestName",
+        "cnn model output abount crop"
     )
 
     def instrumentation(info: Info) -> None:
