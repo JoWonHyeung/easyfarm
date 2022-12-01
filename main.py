@@ -89,17 +89,20 @@ app = FastAPI()
 
 instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)
 
-class PredictionResult(BaseModel):
-    pestName: str
-    pestPercentage: float
 
+class PredictionResult(BaseModel):
+    pestName: str = Field(None, "pestName")
+    pestPercentage: float = Field(None, 'pestPercentage')
+
+    class Config:
+        orm_mode = True
 
 @app.get('/')
 def root_route():
     return {"error": "you must add url /prediction "}
 
 
-@app.post('/prediction',response_model=PredictionResult)
+@app.post('/prediction', response_model=PredictionResult)
 async def prediction_route(image: UploadFile = File(...), response: Response = None):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
@@ -116,7 +119,7 @@ async def prediction_route(image: UploadFile = File(...), response: Response = N
     response.headers['pestName'] = str(np.argmax(prediction[0]))
     response.headers['pestPercentage'] = str(max(prediction[0]))
 
-    return PredictionResult
+    return PredictionResult(pestName = str(np.argmax(prediction[0])), pestPercentage=max(prediction[0]))
 
 
 @app.post('/prediction/version2')
@@ -171,7 +174,7 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
             }
         else:
             response = {
-                'result' : {
+                'result': {
                     'status': 'plantType error'
                 }
             }
