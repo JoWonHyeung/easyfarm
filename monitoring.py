@@ -65,17 +65,25 @@ def model_output(
         metric_namespace: str = "",
         metric_subsystem: str = "",
 ) -> Callable[[Info], None]:
-    METRIC = Counter(
+    METRIC_Result = Counter(
         "http_user_result_pestName",
         "cnn model output about crop",
         labelnames = ("pestName",)
     )
 
+    METRIC_Input = Counter(
+        "http_user_inputPlant",
+        "user input Plant",
+        labelnames=("inputPlant",)
+    )
+
     def instrumentation(info: Info) -> None:
         if info.modified_handler == "/prediction":
             predicted = info.response.headers.get("pestName")
+            inputPlant = info.response.headers.get("inputPlant")
             if predicted:
-                METRIC.labels(predicted).inc()
+                METRIC_Result.labels(predicted).inc()
+                METRIC_Input.labels(inputPlant).inc()
 
     return instrumentation
 

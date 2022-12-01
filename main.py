@@ -91,11 +91,13 @@ instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=
 
 
 class PredictionResult(BaseModel):
-    pestName: str = Field(..., description = "pestName")
-    pestPercentage: float = Field(..., description = 'pestPercentage')
+    pestName: str = Field(..., description="pestName")
+    pestPercentage: float = Field(..., description='pestPercentage')
+    inputPlant: str = Field(..., description='inputPlant')
 
     class Config:
         orm_mode = True
+
 
 @app.get('/')
 def root_route():
@@ -103,7 +105,7 @@ def root_route():
 
 
 @app.post('/prediction', response_model=PredictionResult)
-async def prediction_route(image: UploadFile = File(...), response: Response = None):
+async def prediction_route(image: UploadFile = File(...), response: Response = None, plantType: str = Form(...)):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
 
@@ -119,8 +121,12 @@ async def prediction_route(image: UploadFile = File(...), response: Response = N
 
     response.headers['pestName'] = str(np.argmax(prediction[0]))
     response.headers['pestPercentage'] = str(max(prediction[0]))
+    response.headers['inputPlant'] = plantType
 
-    return PredictionResult(pestName = str(np.argmax(prediction[0])), pestPercentage=max(prediction[0]))
+    return PredictionResult(
+        pestName=str(np.argmax(prediction[0])),
+        pestPercentage=max(prediction[0]),
+        inputPlant=plantType)
 
 
 @app.post('/prediction/version2')
