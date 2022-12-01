@@ -121,12 +121,12 @@ async def prediction_route(image: UploadFile = File(...), response: Response = N
 
     response.headers['pestName'] = str(np.argmax(prediction[0]))
     response.headers['pestPercentage'] = str(max(prediction[0]))
-    response.headers['inputPlant'] = plantType
+    response.headers['inputPlant'] = crop_to_eng(plantType)
 
     return PredictionResult(
         pestName=str(np.argmax(prediction[0])),
         pestPercentage=max(prediction[0]),
-        inputPlant=plantType)
+        inputPlant=crop_to_eng(plantType))
 
 
 @app.post('/prediction/version2')
@@ -218,3 +218,17 @@ def label_to_crop(crop):
         return "파"
     else:
         return "error"
+
+def crop_to_eng(crop):
+    if crop == "고추":
+        return "gochu"
+    elif crop == "무":
+        return "mu"
+    elif crop == "배추":
+        return "bachu"
+    elif crop == "콩":
+        return "kong"
+    elif crop == "파":
+        return "fa"
+    else:
+        return "error input plant"
