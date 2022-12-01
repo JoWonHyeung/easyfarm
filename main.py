@@ -91,8 +91,8 @@ instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=
 
 
 class PredictionResult(BaseModel):
-    pestName: str = Field(..., "pestName")
-    pestPercentage: float = Field(..., 'pestPercentage')
+    pestName: str = Field(..., description = "pestName")
+    pestPercentage: float = Field(..., description = 'pestPercentage')
 
     class Config:
         orm_mode = True
