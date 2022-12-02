@@ -104,8 +104,32 @@ def root_route():
     return {"error": "you must add url /prediction "}
 
 
-@app.post('/prediction', response_model=PredictionResult)
-async def prediction_route(image: UploadFile = File(...), response: Response = None, plantType: str = Form(...)):
+# @app.post('/prediction', response_model=PredictionResult)
+# async def prediction_route(image: UploadFile = File(...), response: Response = None, plantType: str = Form(...)):
+#     contents = await image.read()
+#     img = Image.open(BytesIO(contents))
+#
+#     processed_image = preprocess_image(img, target_size=(224, 224))
+#     prediction = model.predict(processed_image).tolist()
+#
+#     result = {
+#         'result': {
+#             'pestName': label[np.argmax(prediction[0])],
+#             'pestPercentage': max(prediction[0])
+#         }
+#     }
+#
+#     response.headers['pestName'] = str(np.argmax(prediction[0]))
+#     response.headers['pestPercentage'] = str(max(prediction[0]))
+#     response.headers['inputPlant'] = crop_to_eng(plantType)
+#
+#     return PredictionResult(
+#         pestName=str(np.argmax(prediction[0])),
+#         pestPercentage=max(prediction[0]),
+#         inputPlant=crop_to_eng(plantType))
+
+@app.post('/prediction')
+async def prediction_route(image: UploadFile = File(...), plantType: str = Form(...)):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
 
@@ -119,14 +143,7 @@ async def prediction_route(image: UploadFile = File(...), response: Response = N
         }
     }
 
-    response.headers['pestName'] = str(np.argmax(prediction[0]))
-    response.headers['pestPercentage'] = str(max(prediction[0]))
-    response.headers['inputPlant'] = crop_to_eng(plantType)
-
-    return PredictionResult(
-        pestName=str(np.argmax(prediction[0])),
-        pestPercentage=max(prediction[0]),
-        inputPlant=crop_to_eng(plantType))
+    return result
 
 
 @app.post('/prediction/version2')
