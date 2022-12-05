@@ -15,7 +15,7 @@
 
 ### 모델 성능 지표
 
-![image](https://user-images.githubusercontent.com/57468223/201273865-dee587ed-25b4-4b58-b98c-c03df60f5571.png)
+![image](https://user-images.githubusercontent.com/57468223/205545397-c0008838-4dea-4864-865e-02db7b06ab73.png)
 
 
 ### oracle 서버 실행 순서 
