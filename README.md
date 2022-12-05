@@ -6,7 +6,7 @@
 ### 아키텍처(Version 7)
 ![image](https://user-images.githubusercontent.com/57468223/204259888-e6db6a58-e876-4af1-aa9d-02dbc2d2d67c.png)
 
-### 클라우드 비교
+### 클라우드 
 
 - GCP 크레딧을 사용하여 서버 구축
 
