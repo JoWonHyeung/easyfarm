@@ -1,6 +1,6 @@
 # 이지팜
 
-![image](https://user-images.githubusercontent.com/57468223/206992189-b125b4fc-9101-4efc-befa-1d81f384b9db.png)
+![image](https://user-images.githubusercontent.com/57468223/206992311-6ea46bb2-61f2-4dd5-bf1f-331911e32221.png)
 
 
 ### 아키텍처(Version 7)
