@@ -128,6 +128,8 @@ def root_route():
 #         pestPercentage=max(prediction[0]),
 #         inputPlant=crop_to_eng(plantType))
 
+
+#no layer
 @app.post('/prediction')
 async def prediction_route(image: UploadFile = File(...), plantType: str = Form(...)):
     contents = await image.read()
@@ -146,6 +148,7 @@ async def prediction_route(image: UploadFile = File(...), plantType: str = Form(
     return result
 
 
+#exist layer
 @app.post('/prediction/version2')
 async def prediction_test(image: UploadFile = File(...), plantType: str = Form(...)):
     contents = await image.read()
