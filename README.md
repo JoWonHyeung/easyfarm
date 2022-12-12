@@ -6,7 +6,7 @@
 ### 아키텍처(Version 7)
 ![image](https://user-images.githubusercontent.com/57468223/204259888-e6db6a58-e876-4af1-aa9d-02dbc2d2d67c.png)
 
-### 클라우드 비교
+### 클라우드 
 
 - GCP 크레딧을 사용하여 서버 구축
 
@@ -15,7 +15,8 @@
 
 ### 모델 성능 지표
 
-![image](https://user-images.githubusercontent.com/57468223/201273865-dee587ed-25b4-4b58-b98c-c03df60f5571.png)
+![image](https://user-images.githubusercontent.com/57468223/205545463-8947b240-6d86-4e8a-94e2-3cd70487abf1.png)
+![image](https://user-images.githubusercontent.com/57468223/205545482-80b3a08f-36e3-4be7-a2eb-7b11192a5153.png)
 
 
 ### oracle 서버 실행 순서 
