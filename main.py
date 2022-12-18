@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, Form, Response
+from fastapi import FastAPI, UploadFile, File, Form, status
 from io import BytesIO
 from keras.models import load_model
 from keras_preprocessing.image import img_to_array
@@ -10,20 +10,20 @@ from pydantic import BaseModel, Field
 
 def model_load():
     # server model path
-    model_path = "/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5"
-    fa_path = "/Al_Flask_API_Server/model/fa_xception_unfreeze.h5"
-    gochu_path = "/Al_Flask_API_Server/model/gochu_xception_unfreeze.h5"
-    kong_path = "/Al_Flask_API_Server/model/kong_xception_unfreeze.h5"
-    mu_path = "/Al_Flask_API_Server/model/mu_xception_fine_tuning.h5"
-    bachu_path = "/Al_Flask_API_Server/model/bachu_xception_fine_tuning.h5"
+    # model_path = "/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5"
+    # fa_path = "/Al_Flask_API_Server/model/fa_xception_unfreeze.h5"
+    # gochu_path = "/Al_Flask_API_Server/model/gochu_xception_unfreeze.h5"
+    # kong_path = "/Al_Flask_API_Server/model/kong_xception_unfreeze.h5"
+    # mu_path = "/Al_Flask_API_Server/model/mu_xception_fine_tuning.h5"
+    # bachu_path = "/Al_Flask_API_Server/model/bachu_xception_fine_tuning.h5"
 
     # local model path
-    # model_path = "C:/Users/Jo/capstone/model/xception_epoch10_fine_tuning.h5"
-    # fa_path = "C:/Users/Jo/capstone/model/fa_xception_unfreeze.h5"
-    # gochu_path = "C:/Users/Jo/capstone/model/gochu_xception_unfreeze.h5"
-    # kong_path = "C:/Users/Jo/capstone/model/kong_xception_unfreeze.h5"
-    # mu_path = "C:/Users/Jo/capstone/model/mu_xception_fine_tuning.h5"
-    # bachu_path = "C:/Users/Jo/capstone/model/bachu_xception_fine_tuning.h5"
+    model_path = "C:/Users/Jo/capstone/model/xception_epoch10_fine_tuning.h5"
+    fa_path = "C:/Users/Jo/capstone/model/fa_xception_unfreeze.h5"
+    gochu_path = "C:/Users/Jo/capstone/model/gochu_xception_unfreeze.h5"
+    kong_path = "C:/Users/Jo/capstone/model/kong_xception_unfreeze.h5"
+    mu_path = "C:/Users/Jo/capstone/model/mu_xception_fine_tuning.h5"
+    bachu_path = "C:/Users/Jo/capstone/model/bachu_xception_fine_tuning.h5"
 
     model = load_model(model_path)
     fa_model = load_model(fa_path)
@@ -129,7 +129,7 @@ def root_route():
 #         inputPlant=crop_to_eng(plantType))
 
 
-#no layer
+# no layer
 @app.post('/prediction')
 async def prediction_route(image: UploadFile = File(...), plantType: str = Form(...)):
     contents = await image.read()
@@ -141,14 +141,14 @@ async def prediction_route(image: UploadFile = File(...), plantType: str = Form(
     result = {
         'result': {
             'pestName': label[np.argmax(prediction[0])],
-            'pestPercentage': max(prediction[0])
+            'pestPercentage': max(prediction[0]),
+            'status':status.HTTP_201_CREATED
         }
     }
-
     return result
 
 
-#exist layer
+# exist layer
 @app.post('/prediction/version2')
 async def prediction_test(image: UploadFile = File(...), plantType: str = Form(...)):
     contents = await image.read()
@@ -164,7 +164,8 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
             response = {
                 'result': {
                     'pestName': gochu_label[np.argmax(gochu_pred[0])],
-                    'pestPercentage': max(gochu_pred[0])
+                    'pestPercentage': max(gochu_pred[0]),
+                    'status': status.HTTP_201_CREATED
                 }
             }
         elif plantType == "배추":
@@ -172,7 +173,8 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
             response = {
                 'result': {
                     'pestName': bachu_label[np.argmax(bachu_pred[0])],
-                    'pestPercentage': max(bachu_pred[0])
+                    'pestPercentage': max(bachu_pred[0]),
+                    'status': status.HTTP_201_CREATED
                 }
             }
         elif plantType == "파":
@@ -180,7 +182,8 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
             response = {
                 'result': {
                     'pestName': fa_label[np.argmax(fa_pred[0])],
-                    'pestPercentage': max(fa_pred[0])
+                    'pestPercentage': max(fa_pred[0]),
+                    'status': status.HTTP_201_CREATED
                 }
             }
         elif plantType == "콩":
@@ -188,7 +191,8 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
             response = {
                 'result': {
                     'pestName': kong_label[np.argmax(kong_pred[0])],
-                    'pestPercentage': max(kong_pred[0])
+                    'pestPercentage': max(kong_pred[0]),
+                    'status': status.HTTP_201_CREATED
                 }
             }
         elif plantType == "무":
@@ -196,20 +200,22 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
             response = {
                 'result': {
                     'pestName': mu_label[np.argmax(mu_pred[0])],
-                    'pestPercentage': max(mu_pred[0])
+                    'pestPercentage': max(mu_pred[0]),
+                    'status': status.HTTP_201_CREATED
                 }
             }
         else:
             response = {
                 'result': {
-                    'status': 'plantType error'
+                    'status': status.HTTP_400_BAD_REQUEST
                 }
             }
     else:
         response = {
             'result': {
                 'pestName': label[np.argmax(prediction[0])],
-                'pestPercentage': max(prediction[0])
+                'pestPercentage': max(prediction[0]),
+                'status': status.HTTP_201_CREATED
             }
         }
     return response
@@ -238,6 +244,7 @@ def label_to_crop(crop):
         return "파"
     else:
         return "error"
+
 
 def crop_to_eng(crop):
     if crop in "고추":
