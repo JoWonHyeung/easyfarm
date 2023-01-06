@@ -50,7 +50,6 @@ docker build -f ./Dockerfile .
 
 
 ---
-### 서버 관련
 
 ```
 #백그라운드 명령어 & log파일 생성 명령어
@@ -73,14 +72,3 @@ nohup jupyter-notebook --ip=0.0.0.0 --no-browser --port=8928 &
 grep -c processor /proc/cpuinfo
 
 ```
-
-#### Stateful vs Stateless
-
-stateful : server side에 client와 server의 동작, 상태정보를 저장하는 형태, 세션 상태에 기반하여 server의 응답이 달라짐, 예를 들어 TCP가 있다.
-
-stateless : server side에 client와 server의 동작, 상태정보를 저장하지 않는 형태, server의 응답이 client와의 세션 상태와 독립적이다. 예를 들어, UDP/HTTP가 있다.
-![화면 캡처 2022-10-10 123959](https://user-images.githubusercontent.com/57468223/194796265-d2adb4ef-ef8c-4355-86a4-bf82457c1462.png)
-
-#### WSGI
-
-파이썬에서 어플리케이션, 즉 파이썬 스크립트(웹 어플리케이션)가 웹 서버와 통신하기 위한 인터페이스입니다. 프로토콜 개념으로 이해할 수도 있습니다. WSGI는 서버와 앱 양단으로 나뉘어져 있습니다. WSGI 리퀘스트를 처리하려면 서버에서 환경정보와 콜백함수를 앱에 제공해야 합니다. 앱은 그 요청을 처리하고 콜백함수를 통해 서버에 응답합니다.
