@@ -1,7 +1,6 @@
 import os
 from typing import Callable
 
-import numpy as np
 from prometheus_fastapi_instrumentator import Instrumentator, metrics
 from prometheus_fastapi_instrumentator.metrics import Info, Histogram
 from prometheus_client import Counter

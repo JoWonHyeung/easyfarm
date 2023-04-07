@@ -7,7 +7,7 @@ RUN apt-get -y install python3-pip
 
 #Library install
 WORKDIR /Al_Flask_API_Server
-COPY requirements.txt /Al_Flask_API_Server/requirements.txt
+COPY ../requirements.txt /Al_Flask_API_Server/requirements.txt
 
 #Library install
 RUN pip3 install --user --upgrade tensorflow

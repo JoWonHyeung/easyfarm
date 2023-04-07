@@ -1,205 +1,86 @@
 from fastapi import FastAPI, UploadFile, File, Form, status
 from io import BytesIO
-from keras.models import load_model
 from keras_preprocessing.image import img_to_array
 from PIL import Image
 from monitoring import instrumentator
 import numpy as np
 from pydantic import BaseModel, Field
+import constant.labelConstant as LabelConstant
+import constant.path.modelLoad as ModelLoad
 
 
-def model_load():
-    # server model path
-    # model_path = "/Al_Flask_API_Server/model/xception_epoch10_fine_tuning.h5"
-    # fa_path = "/Al_Flask_API_Server/model/fa_xception_unfreeze.h5"
-    # gochu_path = "/Al_Flask_API_Server/model/gochu_xception_unfreeze.h5"
-    # kong_path = "/Al_Flask_API_Server/model/kong_xception_unfreeze.h5"
-    # mu_path = "/Al_Flask_API_Server/model/mu_xception_fine_tuning.h5"
-    # bachu_path = "/Al_Flask_API_Server/model/bachu_xception_fine_tuning.h5"
-
-    # local model path
-    model_path = "C:/Users/Jo/capstone/model/xception_epoch10_fine_tuning.h5"
-    fa_path = "C:/Users/Jo/capstone/model/fa_xception_unfreeze.h5"
-    gochu_path = "C:/Users/Jo/capstone/model/gochu_xception_unfreeze.h5"
-    kong_path = "C:/Users/Jo/capstone/model/kong_xception_unfreeze.h5"
-    mu_path = "C:/Users/Jo/capstone/model/mu_xception_fine_tuning.h5"
-    bachu_path = "C:/Users/Jo/capstone/model/bachu_xception_fine_tuning.h5"
-
-    model = load_model(model_path)
-    fa_model = load_model(fa_path)
-    gochu_model = load_model(gochu_path)
-    kong_model = load_model(kong_path)
-    mu_model = load_model(mu_path)
-    bachu_model = load_model(bachu_path)
-
-    return model, fa_model, gochu_model, kong_model, mu_model, bachu_model
-
-
-label = {
-    0: '고추탄저병',
-    1: '고추흰가루병',
-    2: '무검은무늬병',
-    3: '무노균병',
-    4: '배추검은썩음병',
-    5: '배추노균병',
-    6: '정상_고추',
-    7: '정상_무',
-    8: '정상_배추',
-    9: '정상_콩',
-    10: '정상_파',
-    11: '콩불마름병',
-    12: '콩점무늬병',
-    13: '파검은무늬병',
-    14: '파노균병',
-    15: '파녹병'}
-
-gochu_label = {
-    0: '고추탄저병',
-    1: '고추흰가루병',
-    2: '정상_고추'
-}
-
-mu_label = {
-    0: '무검은무늬병',
-    1: '무노균병',
-    2: '정상_무'
-}
-
-bachu_label = {
-    0: '배추검은썩음병',
-    1: '배추노균병',
-    2: '정상_배추'
-}
-
-fa_label = {
-    0: '정상_파',
-    1: '파검은무늬병',
-    2: '파노균병'
-}
-
-kong_label = {
-    0: '정상_콩',
-    1: '콩불마름병',
-    2: '콩점무늬병'
-}
-
-model, fa_model, gochu_model, kong_model, mu_model, bachu_model = model_load()
+model, fa_model, gochu_model, kong_model, mu_model, bachu_model = ModelLoad.model_load()
 
 app = FastAPI()
 
 instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)
 
-
 class PredictionResult(BaseModel):
     pestName: str = Field(..., description="pestName")
     pestPercentage: float = Field(..., description='pestPercentage')
     inputPlant: str = Field(..., description='inputPlant')
-
     class Config:
         orm_mode = True
-
 
 @app.get('/')
 def root_route():
     return {"error": "you must add url /prediction "}
 
-
-# @app.post('/prediction', response_model=PredictionResult)
-# async def prediction_route(image: UploadFile = File(...), response: Response = None, plantType: str = Form(...)):
-#     contents = await image.read()
-#     img = Image.open(BytesIO(contents))
-#
-#     processed_image = preprocess_image(img, target_size=(224, 224))
-#     prediction = model.predict(processed_image).tolist()
-#
-#     result = {
-#         'result': {
-#             'pestName': label[np.argmax(prediction[0])],
-#             'pestPercentage': max(prediction[0])
-#         }
-#     }
-#
-#     response.headers['pestName'] = str(np.argmax(prediction[0]))
-#     response.headers['pestPercentage'] = str(max(prediction[0]))
-#     response.headers['inputPlant'] = crop_to_eng(plantType)
-#
-#     return PredictionResult(
-#         pestName=str(np.argmax(prediction[0])),
-#         pestPercentage=max(prediction[0]),
-#         inputPlant=crop_to_eng(plantType))
-
-
-# no layer
 @app.post('/prediction')
-async def prediction_route(image: UploadFile = File(...), plantType: str = Form(...)):
-    contents = await image.read()
-    img = Image.open(BytesIO(contents))
-
-    processed_image = preprocess_image(img, target_size=(224, 224))
-    prediction = model.predict(processed_image).tolist()
-
-    result = {
-        'result': {
-            'pestName': label[np.argmax(prediction[0])],
-            'pestPercentage': max(prediction[0]),
-            'status':status.HTTP_201_CREATED
-        }
-    }
-    return result
-
-
-# exist layer
-@app.post('/prediction/version2')
 async def prediction_test(image: UploadFile = File(...), plantType: str = Form(...)):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
 
-    processed_image = preprocess_image(img, target_size=(224, 224))
-    prediction = model.predict(processed_image).tolist()
+    processedImage = preprocessImage(img, target_size=(224, 224))
+    prediction = model.predict(processedImage).tolist()
 
-    response = ""
-    if plantType != label_to_crop(label[np.argmax(prediction[0])]):
+    response = await responseDoubleLayerLogic(plantType, prediction, processedImage)
+    return response
+
+
+async def responseDoubleLayerLogic(plantType, prediction, processedImage):
+    if plantType != labelToCrop(LabelConstant.label[np.argmax(prediction[0])]):
         if plantType == "고추":
-            gochu_pred = gochu_model.predict(processed_image).tolist()
+            gochu_pred = gochu_model.predict(processedImage).tolist()
             response = {
                 'result': {
-                    'pestName': gochu_label[np.argmax(gochu_pred[0])],
+                    'pestName': LabelConstant.gochu_label[np.argmax(gochu_pred[0])],
                     'pestPercentage': max(gochu_pred[0]),
                     'status': status.HTTP_201_CREATED
                 }
             }
         elif plantType == "배추":
-            bachu_pred = bachu_model.predict(processed_image).tolist()
+            bachu_pred = bachu_model.predict(processedImage).tolist()
             response = {
                 'result': {
-                    'pestName': bachu_label[np.argmax(bachu_pred[0])],
+                    'pestName': LabelConstant.bachu_label[np.argmax(bachu_pred[0])],
                     'pestPercentage': max(bachu_pred[0]),
                     'status': status.HTTP_201_CREATED
                 }
             }
         elif plantType == "파":
-            fa_pred = fa_model.predict(processed_image).tolist()
+            fa_pred = fa_model.predict(processedImage).tolist()
             response = {
                 'result': {
-                    'pestName': fa_label[np.argmax(fa_pred[0])],
+                    'pestName': LabelConstant.fa_label[np.argmax(fa_pred[0])],
                     'pestPercentage': max(fa_pred[0]),
                     'status': status.HTTP_201_CREATED
                 }
             }
         elif plantType == "콩":
-            kong_pred = kong_model.predict(processed_image).tolist()
+            kong_pred = kong_model.predict(processedImage).tolist()
             response = {
                 'result': {
-                    'pestName': kong_label[np.argmax(kong_pred[0])],
+                    'pestName': LabelConstant.kong_label[np.argmax(kong_pred[0])],
                     'pestPercentage': max(kong_pred[0]),
                     'status': status.HTTP_201_CREATED
                 }
             }
         elif plantType == "무":
-            mu_pred = mu_model.predict(processed_image).tolist()
+            mu_pred = mu_model.predict(processedImage).tolist()
             response = {
                 'result': {
-                    'pestName': mu_label[np.argmax(mu_pred[0])],
+                    'pestName': LabelConstant.mu_label[np.argmax(mu_pred[0])],
                     'pestPercentage': max(mu_pred[0]),
                     'status': status.HTTP_201_CREATED
                 }
@@ -207,21 +88,21 @@ async def prediction_test(image: UploadFile = File(...), plantType: str = Form(.
         else:
             response = {
                 'result': {
-                    'status': status.HTTP_400_BAD_REQUEST
+                    'status': status.HTTP_400_BAD_REQUEST,
+                    'comment' : "you must check plantType name."
                 }
             }
     else:
         response = {
             'result': {
-                'pestName': label[np.argmax(prediction[0])],
+                'pestName': LabelConstant.label[np.argmax(prediction[0])],
                 'pestPercentage': max(prediction[0]),
                 'status': status.HTTP_201_CREATED
             }
         }
     return response
 
-
-def preprocess_image(image, target_size):
+def preprocessImage(image, target_size):
     if image.mode != "RGB":
         image = image.convert("RGB")
     image = image.resize(target_size)
@@ -230,8 +111,7 @@ def preprocess_image(image, target_size):
     image = np.expand_dims(image, axis=0)
     return image
 
-
-def label_to_crop(crop):
+def labelToCrop(crop):
     if crop == "고추흰가루병" or crop == "고추탄저병" or crop == "정상_고추":
         return "고추"
     elif crop == "무검은무늬병" or crop == "무노균병" or crop == "정상_무":
@@ -246,16 +126,6 @@ def label_to_crop(crop):
         return "error"
 
 
-def crop_to_eng(crop):
-    if crop in "고추":
-        return "gochu"
-    elif crop in "무":
-        return "mu"
-    elif crop in "배추":
-        return "bachu"
-    elif crop in "콩":
-        return "kong"
-    elif crop in "파":
-        return "fa"
-    else:
-        return "error input plant"
+
+
+
