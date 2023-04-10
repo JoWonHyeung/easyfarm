@@ -6,13 +6,11 @@ from monitoring import instrumentator
 import numpy as np
 from pydantic import BaseModel, Field
 import constant.labelConstant as LabelConstant
-import constant.path.modelLoad as ModelLoad
+import model.load.modelLoad as ModelLoad
 
-
-model, fa_model, gochu_model, kong_model, mu_model, bachu_model = ModelLoad.model_load()
+model, fa_model, gochu_model, kong_model, mu_model, bachu_model = ModelLoad.modelLoad()
 
 app = FastAPI()
-
 instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)
 
 class PredictionResult(BaseModel):
@@ -27,18 +25,16 @@ def root_route():
     return {"error": "you must add url /prediction "}
 
 @app.post('/prediction')
-async def prediction_test(image: UploadFile = File(...), plantType: str = Form(...)):
+async def prediction(image: UploadFile = File(...), plantType: str = Form(...)):
     contents = await image.read()
     img = Image.open(BytesIO(contents))
 
     processedImage = preprocessImage(img, target_size=(224, 224))
     prediction = model.predict(processedImage).tolist()
 
-    response = await responseDoubleLayerLogic(plantType, prediction, processedImage)
-    return response
+    return responseDoubleLayerLogic(plantType, prediction, processedImage)
 
-
-async def responseDoubleLayerLogic(plantType, prediction, processedImage):
+def responseDoubleLayerLogic(plantType, prediction, processedImage):
     if plantType != labelToCrop(LabelConstant.label[np.argmax(prediction[0])]):
         if plantType == "고추":
             gochu_pred = gochu_model.predict(processedImage).tolist()

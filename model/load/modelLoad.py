@@ -2,7 +2,7 @@ from keras.models import load_model
 import constant.path.localpath as LocalPath
 import constant.path.serverpath as ServerPath
 
-def model_load():
+def modelLoad():
     #local
     model, fa_path, gochu_path, kong_path, mu_path, bachu_path = LocalPath.localPath()
     #server
