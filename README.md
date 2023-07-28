@@ -1,4 +1,4 @@
-# 이지팜 프로젝트
+# EASYFARM
 
 ![image](https://user-images.githubusercontent.com/57468223/206992311-6ea46bb2-61f2-4dd5-bf1f-331911e32221.png)
 
